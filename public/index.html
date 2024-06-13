@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metar Parser</title>
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+    <script type="module" src="/index.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Metar Parser</h1>
+        
+        <div class="input-group">
+            <label for="icao">ICAO</label>
+            <textarea class="hasPlaceholder usrInput" id="icao" name="icao" rows="1" cols="4" maxlength="4" placeholder="ICAO"></textarea>
+            <button type="button" id="icaoBtn" onclick="submitICAO()">Submit ICAO</button>
+        </div>
+        
+        <div class="input-group">
+            <label for="metar">METAR</label>
+            <textarea class="hasPlaceholder usrInput" id="metar" rows="1" cols="8" name="metar" onkeypress="autoResize()" style="overflow: hidden;" placeholder="METAR"></textarea>
+            <button type="button" id="metarBtn" onclick="submitMETAR()">Submit METAR</button>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,127 @@
+body {
+    font-family: CommitMono;
+    background-image: url(atc_background.jpg);
+    background-size: cover;
+    /*background-color: #cce0db;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: rgba(48, 46, 46, 0.8);
+    padding: 80px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 30%;
+    color: white;
+}
+
+.resultCont {
+    background-color: rgba(48, 46, 46, 0.8);
+    padding: 80px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 50%;
+    height: 70%;
+    color: white;
+}
+
+h1 {
+    margin-bottom: 50px;
+    font-size: xx-large;
+    opacity: 1;
+}
+
+.input-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 1;
+}
+
+label {
+    margin-bottom: 8px;
+    font-size: 22px;
+    font-weight: bold;
+    font-family: CommitMono;
+    opacity: 1;
+}
+
+textarea {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #9b9999;
+    background-color: rgba(176, 192, 188, 0.5);
+    color: white;
+    border-radius: 4px;
+    resize: none;
+    font-family: CommitMono;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    opacity: 1;
+}
+
+.resultView {
+    width: 100%;
+    height: 100%;
+}
+
+.resultText {
+    width: 90%;
+    height: 80%;
+    font-size: 22px;
+}
+
+.usrInput:focus {
+    outline: none;
+    border-color: #ce4043;
+}
+
+.usrInput:hover {
+    border-color: #ce4043;
+}
+
+.hasPlaceholder::-webkit-input-placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.hasPlaceholder::-moz-placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.hasPlaceholder::-ms-input-placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+#icao {
+    width: calc(4ch + 12px); /* width to fit 4 characters plus padding and border */
+    text-align: center;
+}
+
+#metar {
+    resize: none;
+    align-content: center;
+    text-align: center;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #797270;
+    color: rgba(255, 255, 255, 0.8);
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: CommitMono;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #ce4043;
+}
