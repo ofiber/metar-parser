@@ -109,10 +109,3 @@ export async function requestMetar(icao) {
 }
 
 //module.exports = { requestMetar, globalRes };
-
-/*getMetar("KALB").then(result => {
-    globalRes = result;
-    console.log(result);
-});
-
-console.log(globalRes);*/
