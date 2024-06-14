@@ -1,3 +1,5 @@
+import { inject } from "@vercel/analytics";
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -12,6 +14,8 @@ const corsOptions = {
     optionsSuccessStatus: 200,
     credentials: true
 };
+
+inject();
 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
