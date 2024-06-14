@@ -1,4 +1,5 @@
-const metar = "METAR KALB 101451Z 01005KT 10SM FEW020 OVC100 24/12 A3010 RMK AO2 SLP194 T02440122 51010";
+const metar = "METAR KDEN 141853Z 18009KT 10SM SCT047 BKN140 BKN220 26/13 A3010 RMK AO2 SLP106 T02610133";
+// ORIG TEST CASE "METAR KALB 101451Z 01005KT 10SM FEW020 OVC100 24/12 A3010 RMK AO2 SLP194 T12440122 51010";
 
 const cloudDict = {
     "FEW": "Few clouds",
@@ -13,7 +14,8 @@ const timeRegex = new RegExp("\\b\\d{6}Z\\b");
 const windRegex = new RegExp("\\b\\d{5}KT\\b|\\bCLM\\b");
 const visibilityRegex = new RegExp("\\d{1,2}SM|CAVOK|\\b[0-9]{4}\\b");
 const cloudRegex = new RegExp(/\b(OVC|FEW|SCT|BKN)\d{3}|CLR\b/g);
-const tempAndDewpointRegex = new RegExp("\\bM?\\d{2}/M?\\d{2}\\b");
+const tempAndDewpointRegex = new RegExp("\\bT\\d{8}\\b");
+const altTempAndDewpointRegex = new RegExp("\\bM?\\d{2}/M?\\d{2}\\b");
 const altimeterRegex = new RegExp("\\bA\\d{4}|Q\\d{4}\\b");
 const remarksRegex = new RegExp("\\bRMK\\s(AO1|AO2)\\b");
 const seaLevelPressureRegex = new RegExp("\\bSLP\\d{3}\\b");
@@ -24,7 +26,7 @@ function getStation(metar) {
 
     if(!station) return "No station found";
 
-    else return station[0].replace("METAR", "").trim();
+    else return `Station: ${station[0].replace("METAR ", "").trim()}`;
 }
 
 function getTime(metar) {
@@ -41,8 +43,7 @@ function getTime(metar) {
         let hour = time[0].slice(2, 4);
         let minute = time[0].slice(4, 6);
 
-        return `${month}/${day}, ${hour}:${minute} UTC`;
-    
+        return `Date: ${month}/${day}\nTime: ${hour}:${minute} UTC`;
     }
 }
 
@@ -67,10 +68,10 @@ function getVisibility(metar) {
     if(visibility[0].includes("SM")) {
         let sm = visibility[0].replace("SM", "");
         sm = sm + " miles";
-        return sm;
+        return `Visibility: ${sm}`;
     }
     else if(visibility[0].includes("CAVOK")) return "Clouds and visibility OK";
-    else return visibility[0] + " meters";
+    else return `Visibility: ${visibility[0]} meters`;
 }
 
 ///\b(OVC|FEW|SCT|BKN)\d{3}|CLR\b/g
@@ -106,11 +107,31 @@ function getClouds(metar) {
 function getTempAndDewpoint(metar) {
     const tempAndDewpoint = metar.match(tempAndDewpointRegex);
 
-    if(!tempAndDewpoint) return "No temp and dewpoint found";
-    else {
+    if(!tempAndDewpoint) {
+        const altTempAndDewpoint = metar.match(altTempAndDewpointRegex);
 
-        let temp = tempAndDewpoint[0].slice(0, 2);
-        let dewpoint = tempAndDewpoint[0].slice(3, 5);
+        if(!altTempAndDewpoint) return "No temp and dewpoint found";
+        else {
+            let temp = altTempAndDewpoint[0].slice(0, 2);
+            let dewpoint = altTempAndDewpoint[0].slice(3, 5);
+
+            return `Temperature: ${temp}°C\nDewpoint: ${dewpoint}°C`;
+        }
+    }
+    else {
+        var t = tempAndDewpoint[0].replace("T", "");
+
+        let temp = t.slice(0, 4);
+        let dewpoint = t.slice(4, 8);
+
+        temp = temp.slice(0, 3) + "." + temp.slice(3, 4);
+        dewpoint = dewpoint.slice(0, 3) + "." + dewpoint.slice(3, 4);
+
+        if(temp[0] == "1") { temp = temp.replace("1", "-"); }
+        else if(temp[0] == "0") { temp = temp.replace("0", "");}
+
+        if(dewpoint[0] == "1") { dewpoint = dewpoint.replace("1", "-"); }
+        else if(dewpoint[0] == "0") { dewpoint = dewpoint.replace("0", "");}
 
         return `Temperature: ${temp}°C\nDewpoint: ${dewpoint}°C`;
     }

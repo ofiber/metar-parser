@@ -9,9 +9,9 @@ const app = express();
 const port = 8000;
 
 const corsOptions = {
-    origin: 'http://127.0.0.1:8000',
-    methods: 'GET' + 'POST',
-    allowedHeaders: 'Content-Type',
+    origin: '*',
+    methods: 'GET, OPTIONS, PATCH, DELETE, POST, PUT',
+    allowedHeaders: 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version',
     optionsSuccessStatus: 200,
     credentials: true
 };
@@ -19,9 +19,9 @@ const corsOptions = {
 inject.inject();
 injectSpeedInsights.injectSpeedInsights();
 
+app.use(cors(corsOptions));
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cors(corsOptions));
 
 app.use('/', express.static('public', {
     setHeaders: (res, path) => {

@@ -33,8 +33,3 @@ function submitMETAR() {
     let metar = document.getElementById('metar').value;
     alert('METAR submitted: ' + metar);
 }
-
-function getICAO() {
-    console.log('Returning ICAO: ' + globalICAO);
-    return globalICAO;
-}
