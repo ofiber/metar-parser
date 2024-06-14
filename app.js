@@ -1,4 +1,5 @@
 import { inject } from "@vercel/analytics";
+import { injectSpeedInsights } from "@vercel/speed-insights";
 
 const express = require('express');
 const bodyParser = require('body-parser');
