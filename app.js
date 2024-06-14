@@ -1,5 +1,5 @@
-import { inject } from "@vercel/analytics";
-import { injectSpeedInsights } from "@vercel/speed-insights";
+const inject = require("@vercel/analytics");
+const injectSpeedInsights = require("@vercel/speed-insights");
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -10,14 +10,14 @@ const port = 8000;
 
 const corsOptions = {
     origin: 'http://127.0.0.1:8000',
-    methods: 'GET',
+    methods: 'GET' + 'POST',
     allowedHeaders: 'Content-Type',
     optionsSuccessStatus: 200,
     credentials: true
 };
 
-inject();
-injectSpeedInsights();
+inject.inject();
+injectSpeedInsights.injectSpeedInsights();
 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
