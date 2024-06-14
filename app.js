@@ -17,6 +17,7 @@ const corsOptions = {
 };
 
 inject();
+injectSpeedInsights();
 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
