@@ -7,6 +7,8 @@ const port = 8000;
 
 const corsOptions = {
     origin: 'http://127.0.0.1:8000',
+    methods: 'GET',
+    allowedHeaders: 'Content-Type',
     optionsSuccessStatus: 200,
     credentials: true
 };

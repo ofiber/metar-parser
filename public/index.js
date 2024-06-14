@@ -1,4 +1,4 @@
-export let globalICAO = null;
+let globalICAO = null;
 
 window.onload = function() {
     var textarea = document.getElementById("metar");
@@ -26,7 +26,7 @@ function submitICAO() {
 
     console.log('ICAO submitted: ' + icao);
 
-    window.location.href = '/results.html';
+    window.location.href = '/results.html?icao=' + globalICAO;
 }
 
 function submitMETAR() {
@@ -38,5 +38,3 @@ function getICAO() {
     console.log('Returning ICAO: ' + globalICAO);
     return globalICAO;
 }
-
-module.exports = globalICAO;

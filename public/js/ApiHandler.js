@@ -15,7 +15,9 @@ async function getMetar(icaoCode) {
 
     //console.log(url);
 
-    return fetch(url).then(response => {
+    return fetch(url, {
+        method: 'GET',
+    }).then(response => {
         return response.text();
     });
 }
@@ -107,5 +109,3 @@ export async function requestMetar(icao) {
 
     return globalRes;
 }
-
-//module.exports = { requestMetar, globalRes };

@@ -1,5 +1,4 @@
 import { requestMetar } from './js/ApiHandler.js';
-import { globalICAO } from './index.js';
 
 //const requestMetar = require('/js/ApiHandler.js');
 //const result = require('./js/ApiHandler.js');
@@ -23,19 +22,19 @@ PERCIPITATION: 3HR 0.06"
 
 `;
 
-var icao;
-
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 window.onload = function() {
     var results = document.getElementById('results');
-    icao = globalICAO;
+    
+    let params = new URLSearchParams(window.location.search);
+    let icao = params.get('icao');
     console.log(icao);
     results.textContent = "Loading...";
-    sleep(1000).then (() => loadData(results, text));
+    sleep(1000).then (() => loadData(results, icao));
 }
 
-async function loadData(results) {
+async function loadData(results, icao) {
     results.textContent = await requestMetar(icao);
     console.log("Request loaded");
 }
