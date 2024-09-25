@@ -2,6 +2,14 @@ let globalRes = null;
 
 async function getMetar(icaoCode) {
 
+    let headers = new Headers(
+        {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'User-Agent': 'Metar-Parser/harleyo@me.com'
+        }
+    );
+
     let time = parseTimeToZulu();
 
     //console.log(time);
@@ -17,6 +25,7 @@ async function getMetar(icaoCode) {
 
     return fetch(url, {
         method: 'GET',
+        headers: headers
     }).then(response => {
         return response.text();
     });
@@ -100,12 +109,3 @@ function parseTimeToZulu() {
     return `${year}${month}${day}_${hours}${minutes}` + "Z";
 }
 
-export async function requestMetar(icao) {
-    console.log("Requesting METAR for " + icao);
-
-    await getMetar(icao).then(result => {
-        globalRes = result;
-    });
-
-    return globalRes;
-}

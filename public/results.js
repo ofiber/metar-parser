@@ -1,4 +1,4 @@
-import { requestMetar } from './js/ApiHandler.js';
+import { requestMetar } from './../app.js';
 
 //const requestMetar = require('/js/ApiHandler.js');
 //const result = require('./js/ApiHandler.js');
