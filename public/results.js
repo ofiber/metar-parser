@@ -1,4 +1,4 @@
-import { requestMetar } from './../app.js';
+import { getMetar } from '../public/js/ApiHandler.js';
 
 //const requestMetar = require('/js/ApiHandler.js');
 //const result = require('./js/ApiHandler.js');
@@ -24,6 +24,11 @@ PERCIPITATION: 3HR 0.06"
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
+async function loadData(results, icao) {
+    results.textContent = await getMetar(icao);
+    console.log("Request loaded");
+}
+
 window.onload = function() {
     var results = document.getElementById('results');
     
@@ -32,9 +37,4 @@ window.onload = function() {
     console.log(icao);
     results.textContent = "Loading...";
     sleep(1000).then (() => loadData(results, icao));
-}
-
-async function loadData(results, icao) {
-    results.textContent = await requestMetar(icao);
-    console.log("Request loaded");
 }

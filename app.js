@@ -3,6 +3,8 @@ const injectSpeedInsights = require("@vercel/speed-insights");
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path');
+const cors = require('cors');
 
 const app = express();
 const port = 8000;
@@ -10,7 +12,8 @@ const port = 8000;
 inject.inject();
 injectSpeedInsights.injectSpeedInsights();
 
-app.use(express.static('public'));
+app.use(cors());
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/', express.static('public', {
@@ -20,7 +23,7 @@ app.use('/', express.static('public', {
         }
         
         if (path.endsWith('.js')) {
-            res.setHeader('Content-Type', 'text/javascript');
+            res.setHeader('Content-Type', 'script/javascript');
         }
 
         if (path.endsWith('.css')) {
