@@ -4,9 +4,7 @@ async function getMetar(icaoCode) {
 
     let headers = new Headers(
         {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-            'User-Agent': 'Metar-Parser/harleyo@me.com'
+            'User-Agent': '(ApiHandler.js, harleyo@me.com)'
         }
     );
 

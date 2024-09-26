@@ -3,23 +3,13 @@ const injectSpeedInsights = require("@vercel/speed-insights");
 
 const express = require('express');
 const bodyParser = require('body-parser');
-const cors = require('cors');
 
 const app = express();
 const port = 8000;
 
-const corsOptions = {
-    origin: '*',
-    methods: 'GET, OPTIONS, PATCH, DELETE, POST, PUT',
-    allowedHeaders: 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version',
-    optionsSuccessStatus: 200,
-    credentials: true
-};
-
 inject.inject();
 injectSpeedInsights.injectSpeedInsights();
 
-app.use(cors(corsOptions));
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -54,6 +44,12 @@ app.listen(port, () => {
 
 async function getMetar(icaoCode) {
 
+    let headers = new Headers(
+        {
+            'User-Agent': '(app.js, harleyo@me.com)'
+        }
+    );
+
     let time = parseTimeToZulu();
 
     //console.log(time);
@@ -69,6 +65,7 @@ async function getMetar(icaoCode) {
 
     return fetch(url, {
         method: 'GET',
+        headers: headers
     }).then(response => {
         return response.text();
     });
